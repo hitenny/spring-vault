@@ -15,8 +15,6 @@
  */
 package org.springframework.vault.authentication;
 
-import java.util.function.Supplier;
-
 /**
  * Interface to obtain a Kubernetes Service Account Token for Kubernetes authentication.
  * Implementations are used by {@link KubernetesAuthentication}.
@@ -27,30 +25,6 @@ import java.util.function.Supplier;
  * @see KubernetesAuthentication
  */
 @FunctionalInterface
-public interface KubernetesJwtSupplier extends Supplier<String> {
+public interface KubernetesJwtSupplier extends CredentialSupplier {
 
-	/**
-	 * Get a JWT for Kubernetes authentication.
-	 *
-	 * @return the Kubernetes Service Account JWT.
-	 */
-	@Override
-	String get();
-
-	/**
-	 * Retrieve a cached {@link KubernetesJwtSupplier} that obtains the JWT early and
-	 * reuses the token for each {@link #get()} call. This is useful to prevent I/O
-	 * operations in e.g. reactive usage.
-	 * <p>
-	 * Reusing a cached token can lead to authentication failures if the token expires.
-	 *
-	 * @return a caching {@link KubernetesJwtSupplier}.
-	 * @since 2.2
-	 */
-	default KubernetesJwtSupplier cached() {
-
-		String jwt = get();
-
-		return () -> jwt;
-	}
 }

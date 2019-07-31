@@ -61,7 +61,7 @@ public class KubernetesAuthentication implements ClientAuthentication,
 	public KubernetesAuthentication(KubernetesAuthenticationOptions options,
 			RestOperations restOperations) {
 
-		Assert.notNull(options, "KubeAuthenticationOptions must not be null");
+		Assert.notNull(options, "KubernetesAuthenticationOptions must not be null");
 		Assert.notNull(restOperations, "RestOperations must not be null");
 
 		this.options = options;
@@ -78,7 +78,7 @@ public class KubernetesAuthentication implements ClientAuthentication,
 	public static AuthenticationSteps createAuthenticationSteps(
 			KubernetesAuthenticationOptions options) {
 
-		Assert.notNull(options, "CubbyholeAuthenticationOptions must not be null");
+		Assert.notNull(options, "KubernetesAuthenticationOptions must not be null");
 
 		String token = options.getJwtSupplier().get();
 		return AuthenticationSteps.fromSupplier(
