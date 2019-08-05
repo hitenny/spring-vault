@@ -177,6 +177,6 @@ public class PcfAuthentication
 		signer.update(message, 0, message.length);
 
 		byte[] signature = signer.generateSignature();
-		return Base64Utils.encodeToString(signature);
+		return Base64Utils.encodeToUrlSafeString(signature);
 	}
 }
