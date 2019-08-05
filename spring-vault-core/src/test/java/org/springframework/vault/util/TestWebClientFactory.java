@@ -29,7 +29,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  */
 public class TestWebClientFactory {
 
-	private static final VaultEndpoint TEST_VAULT_ENDPOINT = new VaultEndpoint();
+	private static final VaultEndpoint TEST_VAULT_ENDPOINT = TestRestTemplateFactory.TEST_VAULT_ENDPOINT;
 
 	/**
 	 * Create a new {@link WebClient} using the {@link SslConfiguration}. See
@@ -44,8 +44,8 @@ public class TestWebClientFactory {
 		Assert.notNull(sslConfiguration, "SslConfiguration must not be null!");
 
 		try {
-			ClientHttpConnector connector = ClientHttpConnectorFactory.create(
-					new ClientOptions(), sslConfiguration);
+			ClientHttpConnector connector = ClientHttpConnectorFactory
+					.create(new ClientOptions(), sslConfiguration);
 			return ReactiveVaultClients.createWebClient(TEST_VAULT_ENDPOINT, connector);
 		}
 		catch (Exception e) {
