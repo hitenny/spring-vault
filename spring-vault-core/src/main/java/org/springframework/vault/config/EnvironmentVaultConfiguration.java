@@ -365,10 +365,15 @@ public class EnvironmentVaultConfiguration extends AbstractVaultConfiguration
 		}
 		KubernetesJwtSupplier jwtSupplier = new KubernetesServiceAccountTokenFile(
 				tokenFile);
-
+				
+		String path = getEnvironment().getProperty("vault.kubernetes.kubernetes-path");
+		if (!StringUtils.hasText(path)) {
+			path = KubernetesAuthenticationOptions.DEFAULT_KUBERNETES_AUTHENTICATION_PATH;
+		}
 		KubernetesAuthenticationOptions authenticationOptions = KubernetesAuthenticationOptions
 				.builder() //
 				.role(role) //
+				.path(path) //
 				.jwtSupplier(jwtSupplier) //
 				.build();
 
